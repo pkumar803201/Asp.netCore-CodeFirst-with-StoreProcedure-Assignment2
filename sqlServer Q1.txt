@@ -1,0 +1,80 @@
+Q. 1) Create the following Table
+BusInfo (BusID – PK (Identity Column), BoardingPoint, TravelDate, Amount, Rating)
+
+Amount can accept decimal values
+
+Insert at least 7 records in the table							
+BusID	BoardingPoint	TravelDate	Amount	Rating
+1	BGL	18-06-2017	400.65	2
+2	HYD	05-10-2017	600.00	3
+3	CHN	25-07-2016	445.95	3
+4	PUN	10-12-2017	543.00	4
+5	MUM	28-01-2017	500.50	4
+6	PUN	27-03-2016	333.55	3
+7	MUM	06-11-2016	510.00	4
+
+----------------------------------------------------------------------------------------------------------
+Create table BusInfo(BusId int identity(1,1),BoardingPoint varchar(20),TravelDate Date,Amount Decimal,Rating int,
+constraint pk_BusId primary key(BusId)); 
+----------------------------------------------------------------------------------------------------------------
+
+Create a stored procedure to insert the records in BusInfo table.		
+---------------------------------------------------------------------------------------------------------------------------------------
+Create Or Alter procedure InsertBusInfo(@BusId int,@BoardingPoint varchar(20),@TravelDate Date,@Amount Decimal,@Rating int)
+As
+Begin
+insert into BusInfo(BusId,BoardingPoint,TravelDate,Amount,Rating)
+values(@BusId,@BoardingPoint,@TravelDate,@Amount,@Rating);
+End
+
+SET IDENTITY_INSERT [dbo].[BusInfo] ON
+
+ exec  InsertBusInfo
+ @BusId=1,@BoardingPoint='BGL',@TravelDate='2017-06-18',@Amount=400.65,@Rating=2
+
+ exec  InsertBusInfo
+ @BusId=2,@BoardingPoint='HYD',@TravelDate='2017-10-05',@Amount=600.00,@Rating=3
+
+ 
+ exec  InsertBusInfo
+ @BusId=3,@BoardingPoint='CHN',@TravelDate='2016-07-25',@Amount=445.95,@Rating=3
+
+ 
+ exec  InsertBusInfo
+ @BusId=4,@BoardingPoint='PUN',@TravelDate='2017-12-10',@Amount=543.00,@Rating=4
+
+ 
+ exec  InsertBusInfo
+ @BusId=5,@BoardingPoint='MUM',@TravelDate='2017-01-28',@Amount=500.50,@Rating=4
+
+ 
+ exec  InsertBusInfo
+ @BusId=6,@BoardingPoint='PUN',@TravelDate='2016-03-27',@Amount=333.55,@Rating=3
+
+ 
+ exec  InsertBusInfo
+ @BusId=7,@BoardingPoint='MUM',@TravelDate='2016-11-06',@Amount=510.00,@Rating=4
+---------------------------------------------------------------------------------------------------------------
+ select * from BusInfo
+-----------------------------------------------------------------------------------------------------------------
+
+Solve any two queries from below
+Retrieve all BoardingPoint and TravelDate for the amount which is greater than 450.
+--------------------------------------------------------------------------------------------------------------
+ Create Or Alter procedure RetrieveBoardingPointTravelDate 
+ As
+ Begin
+ Select BoardingPoint,TravelDate from BusInfo where Amount> 450;
+ End
+
+ exec RetrieveBoardingPointTravelDate
+---------------------------------------------------------------------------------------------------------------
+⦁  Create View Bus_View to display the BusID, BoardingPoint whose rating is greater than 3
+
+-------------------------------------------------------------------------------------------
+Create view View_Bus
+ As
+ select BusID, BoardingPoint from BusInfo where Rating>3;
+
+ select * from View_Bus;
+------------------------------------------------------------------------------------------------

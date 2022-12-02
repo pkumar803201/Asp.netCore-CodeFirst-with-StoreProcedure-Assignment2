@@ -1,0 +1,75 @@
+﻿@model PKRTravelsWebApp.Models.BusInfoVM
+@{
+    ViewData["Title"] = "Index";
+}
+
+@if (TempData["ResultOk"] != null)
+{
+    <h1 class="alert-success">@TempData["ResultOk"]</h1>
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">BusInfo List</h2>
+        </div>
+
+
+
+
+        <div class="col-6 text-left">
+            <a asp-controller="BusInfo" asp-action="Create" class="btn btn-primary">
+               <i class="bi bi-plus-circle"></i> &nbsp; Create New BusInfo
+            </a>
+        </div>
+    </div>
+    <br /><br />
+    <div class="col mb-3">
+        <a asp-controller="BusInfo" asp-action="Create" class="btn btn-lg btn-primary"><i class="bi bi-file-plus-fill"></i>Add BusInfo</a>
+    </div>
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th scope="col">BusId</th>
+                <th scope="col">Boarding Point</th>
+                <th scope="col">Travel Date</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Rating</th>
+               
+                
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model.BusInfoList)
+            {
+                <tr>
+                    <td width="20%">
+                        @item.BusId
+                    </td>
+                    <td width="20%">
+                        @item.BoardingPoint
+                    </td>
+                    <td width="20%">
+                        @item.TravelDate.ToString("dd-MM-yyyy")
+                    </td>
+                    <td width="20%">
+                        @item.Amount
+                    </td>
+                    <td width="20%">
+                        @item.Rating
+                    </td>
+                   
+                   
+                    @*<td>
+                        <div role="group" class="w-60 btn-group">
+                            <a asp-controller="Customer" asp-action="Edit" asp-route-id="@item.BusId" class=" btn btn-sm btn-primary"><i class="bi bi-pencil-square"></i>Edit</a>&nbsp;
+                            <a asp-controller="Customer" asp-action="Delete" asp-route-id="@item.BusId" class="btn btn-sm btn-danger"><i class="bi bi-trash-fill"></i>Delete</a>
+                        </div>
+                    </td>*@
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
