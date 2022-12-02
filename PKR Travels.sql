@@ -1,6 +1,6 @@
 create database PKRTravelsDB
 use PKRTravelsDB
-Create table BusInfo(BusId int identity(1,1),BoardingPoint varchar(20),TravelDate Date,Amount Decimal,Rating int
+Create table BusInfo(BusId int identity(1,1),BoardingPoint varchar(20),TravelDate Date,Amount Decimal(6,2),Rating int
 constraint pk_BusId primary key(BusId));
 
 Create Procedure dbo.GetBusList
@@ -12,7 +12,7 @@ end
 Create proc dbo.InsertBusInfo
 (
 @BoardingPoint nvarchar(20),
-@Amount Decimal,
+@Amount Decimal(6,2),
 @Rating int
 )
 as
